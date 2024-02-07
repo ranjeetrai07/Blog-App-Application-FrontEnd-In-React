@@ -6,7 +6,9 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 
 function NewFeed() {
 
-    const [postContent, setPostContent]=useState(null)
+    const [postContent, setPostContent]=useState({
+      content : []
+    })
 
    useEffect( () => {
     //load all the post from server 
@@ -18,7 +20,7 @@ function NewFeed() {
     })
    },[]) 
 
-   console.log(postContent)
+   //console.log(postContent)
    
   return (
     <div className="container-fluid">
@@ -31,12 +33,13 @@ function NewFeed() {
         }>
 
         <h1>Blogs Count ( {postContent?.totalElements} )</h1>
-        {/* {
-            postContent?.content.map((post) => {
-                
-            })
-        } */}
- 
+        {
+          postContent?.content.map((post) => (
+              <Post post={post} key={post.postId}/>
+        
+          ))
+        }
+        <Post/>
         </Col>
       </Row>
     </div>
